@@ -30,7 +30,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mza-l1-Cmw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Share" id="ahC-eG-AiS">
+                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="ahC-eG-AiS">
                                         <connections>
                                             <action selector="share:" destination="BYZ-38-t0r" id="bHS-T5-8L0"/>
                                         </connections>
@@ -54,16 +54,19 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LzE-h7-AF5">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="VPe-Zz-RQD"/>
+                                    <barButtonItem title="Camera" image="camera" catalog="system" id="qTs-lv-u2l">
+                                        <connections>
+                                            <action selector="chooseFromCamera:" destination="BYZ-38-t0r" id="MMx-Ha-fNA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wv0-U8-RGR"/>
                                     <barButtonItem title="Album" id="QCt-mI-hQj">
                                         <connections>
                                             <action selector="chooseFromAlbum:" destination="BYZ-38-t0r" id="KfH-m4-721"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Camera" id="qTs-lv-u2l">
-                                        <connections>
-                                            <action selector="chooseFromCamera:" destination="BYZ-38-t0r" id="MMx-Ha-fNA"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="WwV-0X-5f1"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -105,4 +108,8 @@
             <point key="canvasLocation" x="139" y="127"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+    </resources>
 </document>

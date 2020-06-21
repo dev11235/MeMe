@@ -25,6 +25,10 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         .strokeWidth: -3,
     ]
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -77,6 +81,9 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func cancel(_ sender: Any) {
+        imageView.image = nil
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
