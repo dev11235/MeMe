@@ -9,6 +9,9 @@
 import UIKit
 
 class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    let DEFAULT_TOP_TEXT = "TOP"
+    let DEFAULT_BOTTOM_TEXT = "BOTTOM"
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -43,8 +46,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setMemeTextFieldProperties(topTextField, "TOP")
-        setMemeTextFieldProperties(bottomTextField, "BOTTOM")
+        setMemeTextFieldProperties(topTextField, DEFAULT_TOP_TEXT)
+        setMemeTextFieldProperties(bottomTextField, DEFAULT_BOTTOM_TEXT)
     }
     
     func setMemeTextFieldProperties(_ textField: UITextField, _ defaultText: String) {
@@ -54,19 +57,20 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         textField.borderStyle = .none
         textField.delegate = self
     }
-
-    @IBAction func chooseFromAlbum(_ sender: Any) {
+    
+    func pickFromSource(_ sourceType: UIImagePickerController.SourceType) {
         let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = sourceType
         imagePickerController.delegate = self
         present(imagePickerController, animated: true)
     }
+
+    @IBAction func chooseFromAlbum(_ sender: Any) {
+        pickFromSource(.photoLibrary)
+    }
     
     @IBAction func chooseFromCamera(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .camera
-        imagePickerController.delegate = self
-        present(imagePickerController, animated: true)
+        pickFromSource(.camera)
     }
     
     @IBAction func share(_ sender: Any) {
@@ -82,8 +86,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func cancel(_ sender: Any) {
         imageView.image = nil
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        topTextField.text = DEFAULT_TOP_TEXT
+        bottomTextField.text = DEFAULT_BOTTOM_TEXT
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -99,8 +103,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if (textField == topTextField && textField.text == "TOP")
-            || (textField == bottomTextField && textField.text == "BOTTOM") {
+        if (textField == topTextField && textField.text == DEFAULT_TOP_TEXT)
+            || (textField == bottomTextField && textField.text == DEFAULT_BOTTOM_TEXT) {
             textField.text = ""
         }
     }
@@ -139,7 +143,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func save() {
-        let meme = Meme(topPhrase: topTextField.text!, bottomPhrase: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        let _ = Meme(topPhrase: topTextField.text!, bottomPhrase: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
     }
     
     func generateMemedImage() -> UIImage {
