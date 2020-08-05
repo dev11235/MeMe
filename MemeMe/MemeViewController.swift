@@ -85,9 +85,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func cancel(_ sender: Any) {
-        imageView.image = nil
-        topTextField.text = DEFAULT_TOP_TEXT
-        bottomTextField.text = DEFAULT_BOTTOM_TEXT
+        self.dismiss(animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -143,7 +141,10 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func save() {
-        let _ = Meme(topPhrase: topTextField.text!, bottomPhrase: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topPhrase: topTextField.text!, bottomPhrase: bottomTextField.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.memes.append(meme)
+        self.dismiss(animated: true)
     }
     
     func generateMemedImage() -> UIImage {
