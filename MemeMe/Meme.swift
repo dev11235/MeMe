@@ -17,8 +17,17 @@ struct Meme {
 }
 
 extension Meme {
-    static var allMemes: [Meme] {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.memes
+    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    static func countMemes() -> Int {
+        return appDelegate.memes.count
+    }
+    
+    static func addNewMeme(_ meme: Meme) {
+        appDelegate.memes.append(meme)
+    }
+    
+    static func findMeme(_ index: Int) -> Meme {
+        return appDelegate.memes[index]
     }
 }

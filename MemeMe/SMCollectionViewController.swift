@@ -33,18 +33,18 @@ class SMCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Meme.allMemes.count
+        return Meme.countMemes()
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SMCollectionCell", for: indexPath) as! SMCollectionCell
-        let meme = Meme.allMemes[indexPath.row]
+        let meme = Meme.findMeme(indexPath.row)
         cell.imageView?.image = meme.memedImage
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
-        MemeUtilities.pushMemeDetailViewController(Meme.allMemes[indexPath.row], self)
+        MemeUtilities.pushMemeDetailViewController(Meme.findMeme(indexPath.row), self)
     }
 
 }

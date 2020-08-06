@@ -24,12 +24,12 @@ class SMTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Meme.allMemes.count
+        return Meme.countMemes()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SMTableCell") as! SMTableCell
-        let meme = Meme.allMemes[indexPath.row]
+        let meme = Meme.findMeme(indexPath.row)
         cell.topLabel?.text = meme.topPhrase
         cell.bottomLabel?.text = meme.bottomPhrase
         cell.memeImageView?.image = meme.memedImage
@@ -37,7 +37,7 @@ class SMTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        MemeUtilities.pushMemeDetailViewController(Meme.allMemes[indexPath.row], self)
+        MemeUtilities.pushMemeDetailViewController(Meme.findMeme(indexPath.row), self)
     }
     
 }
